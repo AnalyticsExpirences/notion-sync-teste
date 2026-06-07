@@ -1,0 +1,21 @@
+name: Import Notion
+
+on:
+  workflow_dispatch:
+
+jobs:
+  import-notion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: Gabriella439/notion-to-markdown@main
+        with:
+          notion-token: ${{ secrets.NOTION_TOKEN }}
+
+      - name: Commit exported files
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "Import Notion content"
